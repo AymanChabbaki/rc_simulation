@@ -1,7 +1,8 @@
 ﻿/* ── Controls panel — Instrument style ─────────────────────────────────────── */
 
 .controls {
-  width: 260px;
+  width: 100%;
+  max-width: 260px;
   flex-shrink: 0;
   padding: 0;
   background: #ffffff;
@@ -233,4 +234,11 @@
   background: rgba(220,38,38,0.08);
   color: #b91c1c;
   border: 1px solid rgba(220,38,38,0.2);
+}
+
+@media (max-width: 749px) {
+  .controls {
+    width: 100%;
+    max-width: 480px;
+  }
 }

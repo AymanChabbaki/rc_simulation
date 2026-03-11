@@ -75,3 +75,33 @@
 .btn:hover .compLabel {
   color: #3f6f00;
 }
+
+@media (max-width: 749px) {
+  .palette {
+    width: 100%;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .title {
+    display: none;
+  }
+  .btn {
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 4px;
+    border-bottom: none;
+    border-right: 1px solid rgba(0,0,0,0.05);
+    justify-content: center;
+  }
+  .btn:last-child {
+    border-right: none;
+  }
+  .compImg {
+    width: 38px;
+    height: 24px;
+  }
+  .compLabel {
+    display: none;
+  }
+}

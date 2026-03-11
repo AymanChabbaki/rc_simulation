@@ -1,12 +1,28 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { C_MAP } from './simulation';
 
 const TOTAL_POINTS = 600;
 const ANIM_DURATION_MS = 1400; // ms for the curve to fully draw
 
-export default function RCGraph({ type, R, Res2, vg, w = 420, h = 460 }) {
-  const canvasRef = useRef(null);
-  const rafRef    = useRef(null);
+export default function RCGraph({ type, R, Res2, vg }) {
+  const containerRef = useRef(null);
+  const canvasRef    = useRef(null);
+  const rafRef       = useRef(null);
+
+  // Self-sizing: measure container and resize canvas to fill it
+  const [canvasW, setCanvasW] = useState(460);
+  const canvasH = Math.round(canvasW * (540 / 460));
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(entries => {
+      const w = Math.round(entries[0].contentRect.width);
+      if (w > 0) setCanvasW(w);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []); 
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -114,23 +130,6 @@ export default function RCGraph({ type, R, Res2, vg, w = 420, h = 460 }) {
       ctx.textAlign = 'right';
       ctx.fillText(`E = ${E.toFixed(1)} V`, padL + plotW - 4, padT - 6);
 
-      // τ crosshair
-      const tauXpx  = padL + (1 / 5) * plotW;
-      const tauYval = isCharge ? (1 - Math.exp(-1)) : Math.exp(-1);
-      const tauYpx  = padT + plotH - tauYval * plotH;
-      ctx.strokeStyle = 'rgba(140, 90, 0, 0.35)';
-      ctx.lineWidth   = 1;
-      ctx.setLineDash([3, 3]);
-      ctx.beginPath(); ctx.moveTo(tauXpx, padT + plotH); ctx.lineTo(tauXpx, tauYpx); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(padL, tauYpx); ctx.lineTo(tauXpx, tauYpx); ctx.stroke();
-      ctx.setLineDash([]);
-
-      // τ label
-      ctx.fillStyle = 'rgba(120,70,0,0.65)';
-      ctx.font      = '10px "IBM Plex Mono", monospace';
-      ctx.textAlign = 'left';
-      ctx.fillText(`${(tauYval * E).toFixed(2)} V @ τ`, tauXpx + 6, tauYpx - 5);
-
       // Title — charge or discharge label only
       ctx.fillStyle = accent;
       ctx.font      = '12px "IBM Plex Mono", monospace';
@@ -221,18 +220,17 @@ export default function RCGraph({ type, R, Res2, vg, w = 420, h = 460 }) {
 
     rafRef.current = requestAnimationFrame(frame);
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [type, R, Res2, vg, w, h]);
+  }, [type, R, Res2, vg, canvasW]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={w * (window.devicePixelRatio || 1)}
-      height={h * (window.devicePixelRatio || 1)}
-      style={{
-        width: w, height: h,
-        display: 'block',
-      }}
-    />
+    <div ref={containerRef} style={{ width: '100%' }}>
+      <canvas
+        ref={canvasRef}
+        width={canvasW * (window.devicePixelRatio || 1)}
+        height={canvasH * (window.devicePixelRatio || 1)}
+        style={{ width: '100%', height: canvasH, display: 'block' }}
+      />
+    </div>
   );
 }
 

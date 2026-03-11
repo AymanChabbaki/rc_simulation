@@ -70,7 +70,9 @@ function DraggableImage({ img, W, H, onDrop }) {
 
     const move = ev => {
       const r = svgRectRef.current;
-      const [nx, ny] = fromSVG(ev.clientX - r.left, ev.clientY - r.top, W, H);
+      const scaleX = W / r.width;
+      const scaleY = H / r.height;
+      const [nx, ny] = fromSVG((ev.clientX - r.left) * scaleX, (ev.clientY - r.top) * scaleY, W, H);
       setDragPos({ x: nx, y: ny });        // ← state update → re-render → image follows cursor
     };
 
@@ -79,7 +81,9 @@ function DraggableImage({ img, W, H, onDrop }) {
       window.removeEventListener('mouseup', up);
       setIsDragging(false);
       const r = svgRectRef.current;
-      const [nx, ny] = fromSVG(ev.clientX - r.left, ev.clientY - r.top, W, H);
+      const scaleX = W / r.width;
+      const scaleY = H / r.height;
+      const [nx, ny] = fromSVG((ev.clientX - r.left) * scaleX, (ev.clientY - r.top) * scaleY, W, H);
       onDrop(img.id, nx, ny);
     };
 
@@ -97,7 +101,9 @@ function DraggableImage({ img, W, H, onDrop }) {
     const move = ev => {
       const t = ev.touches[0];
       const r = svgRectRef.current;
-      const [nx, ny] = fromSVG(t.clientX - r.left, t.clientY - r.top, W, H);
+      const scaleX = W / r.width;
+      const scaleY = H / r.height;
+      const [nx, ny] = fromSVG((t.clientX - r.left) * scaleX, (t.clientY - r.top) * scaleY, W, H);
       setDragPos({ x: nx, y: ny });
     };
 
@@ -107,7 +113,9 @@ function DraggableImage({ img, W, H, onDrop }) {
       setIsDragging(false);
       const t = ev.changedTouches[0];
       const r = svgRectRef.current;
-      const [nx, ny] = fromSVG(t.clientX - r.left, t.clientY - r.top, W, H);
+      const scaleX = W / r.width;
+      const scaleY = H / r.height;
+      const [nx, ny] = fromSVG((t.clientX - r.left) * scaleX, (t.clientY - r.top) * scaleY, W, H);
       onDrop(img.id, nx, ny);
     };
 
@@ -143,7 +151,8 @@ export default function CircuitBoard({ state, onDrop, onReset, W = 600, H = 600 
     <svg
       width={W}
       height={H}
-      style={{ background: '#d8e8c4', touchAction: 'none', flexShrink: 0, display: 'block' }}
+      viewBox={`0 0 ${W} ${H}`}
+      style={{ background: '#d8e8c4', touchAction: 'none', display: 'block', width: '100%', height: 'auto' }}
     >
       {/* Wires */}
       {WIRES.map((w, i) => wire(w, `w${i}`))}

@@ -61,8 +61,6 @@ export default function App() {
                     R={state.R}
                     Res2={state.Res2}
                     vg={state.vg}
-                    w={460}
-                    h={540}
                   />
                 : <div className="graph-placeholder">
                     <span>Assemblez le circuit<br/>pour voir la courbe</span>

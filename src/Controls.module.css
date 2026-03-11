@@ -1,0 +1,114 @@
+.controls {
+  width: 280px;
+  padding: 16px 14px;
+  background: #f9f9f9;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+  flex-shrink: 0;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.heading {
+  font-size: 15px;
+  margin: 0 0 14px;
+  color: #1a237e;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  gap: 4px;
+  color: #333;
+  font-weight: 600;
+}
+
+.slider {
+  accent-color: #1565c0;
+}
+
+.val {
+  font-weight: normal;
+  color: #1565c0;
+}
+
+.hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 12px 0;
+}
+
+.meter {
+  margin-bottom: 10px;
+}
+
+.meterLabel {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.btnRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.calBtn {
+  padding: 3px 7px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background: #eee;
+  cursor: pointer;
+  font-size: 11px;
+  transition: background 0.15s;
+}
+
+.calBtn:hover {
+  background: #d0e8ff;
+}
+
+.calBtn.active {
+  background: #1565c0;
+  color: #fff;
+  border-color: #1565c0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+}
+
+.table td {
+  padding: 3px 6px;
+  border: 1px solid #ddd;
+  font-size: 12px;
+}
+
+.table td:first-child {
+  background: #f0f0f0;
+  font-weight: 600;
+  width: 55%;
+}
+
+.badge {
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ok {
+  background: #c8e6c9;
+  color: #1b5e20;
+  border: 1px solid #81c784;
+}
+
+.err {
+  background: #ffcdd2;
+  color: #b71c1c;
+  border: 1px solid #e57373;
+}

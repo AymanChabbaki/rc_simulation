@@ -1,0 +1,51 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #eceff1;
+  min-height: 100vh;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background: #fdd835;
+  padding: 8px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  border-bottom: 2px solid #f9a825;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1a237e;
+}
+
+.app-subtitle {
+  font-size: 12px;
+  color: #444;
+}
+
+.app-body {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  overflow-x: auto;
+}
+
+.board-wrapper {
+  flex-shrink: 0;
+}
+
+.graph-wrapper {
+  flex-shrink: 0;
+  padding: 16px 8px;
+  display: flex;
+  align-items: flex-start;
+}

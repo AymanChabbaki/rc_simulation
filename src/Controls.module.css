@@ -1,20 +1,18 @@
 ﻿/* ── Controls panel — Instrument style ─────────────────────────────────────── */
 
 .controls {
-  width: 270px;
+  width: 260px;
+  flex-shrink: 0;
   padding: 0;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.02), 0 4px 20px rgba(0,0,0,0.08);
-  overflow-y: auto;
-  overflow-x: hidden;
-  flex-shrink: 0;
+  overflow: hidden;
   font-family: var(--font-ui, 'Space Grotesk', sans-serif);
   font-size: 13px;
   color: #1a1a1a;
   align-self: flex-start;
-  max-height: calc(100vh - 80px);
 }
 
 /* panel header bar */
@@ -29,6 +27,13 @@
   border-bottom: 1px solid rgba(0,0,0,0.06);
   background: rgba(0,0,0,0.02);
   margin: 0;
+  border-radius: 12px 12px 0 0;
+}
+
+/* sections wrapper — vertical stack */
+.sectionsRow {
+  display: flex;
+  flex-direction: column;
 }
 
 /* section block */
@@ -36,6 +41,13 @@
   padding: 14px 16px;
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
+
+.section:last-child {
+  border-bottom: none;
+}
+
+/* Mesures section — no extra sizing needed */
+.sectionMeasures {}
 
 .sectionTitle {
   font-family: var(--font-mono, 'IBM Plex Mono', monospace);
@@ -63,7 +75,8 @@
 .sliderRow {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  width: 100%;
 }
 
 /* Custom slider */

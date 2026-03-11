@@ -4,7 +4,7 @@ import { C_MAP } from './simulation';
 const TOTAL_POINTS = 600;
 const ANIM_DURATION_MS = 1400; // ms for the curve to fully draw
 
-export default function RCGraph({ type, R, Res2, vg }) {
+export default function RCGraph({ type, R, Res2, vg, w = 420, h = 460 }) {
   const canvasRef = useRef(null);
   const rafRef    = useRef(null);
 
@@ -131,20 +131,20 @@ export default function RCGraph({ type, R, Res2, vg }) {
       ctx.textAlign = 'left';
       ctx.fillText(`${(tauYval * E).toFixed(2)} V @ τ`, tauXpx + 6, tauYpx - 5);
 
-      // Title
+      // Title — charge or discharge label only
       ctx.fillStyle = accent;
-      ctx.font      = '13px "IBM Plex Mono", monospace';
+      ctx.font      = '12px "IBM Plex Mono", monospace';
       ctx.textAlign = 'center';
       ctx.fillText(
-        isCharge ? 'Vc(t) = E(1 − e⁻ᵗᐟᶜ)' : 'Vc(t) = E · e⁻ᵗᐟᶜ',
+        isCharge ? 'Charge' : 'Décharge',
         W / 2, 24
       );
 
-      // Params line
+      // Params line — R and E only
       ctx.fillStyle = 'rgba(0,0,0,0.35)';
       ctx.font      = '10px "IBM Plex Mono", monospace';
       ctx.fillText(
-        `R=${R.toFixed(0)}Ω  C=${(Cval*1e6).toFixed(0)}μF  τ=${(tau*1000).toFixed(2)}ms  E=${E.toFixed(1)}V`,
+        `R=${R.toFixed(0)}Ω  E=${E.toFixed(1)}V`,
         W / 2, 42
       );
     }
@@ -221,17 +221,15 @@ export default function RCGraph({ type, R, Res2, vg }) {
 
     rafRef.current = requestAnimationFrame(frame);
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [type, R, Res2, vg]);
+  }, [type, R, Res2, vg, w, h]);
 
   return (
     <canvas
       ref={canvasRef}
-      width={500 * (window.devicePixelRatio || 1)}
-      height={560 * (window.devicePixelRatio || 1)}
+      width={w * (window.devicePixelRatio || 1)}
+      height={h * (window.devicePixelRatio || 1)}
       style={{
-        width: 500, height: 560,
-        borderRadius: 14,
-        boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+        width: w, height: h,
         display: 'block',
       }}
     />

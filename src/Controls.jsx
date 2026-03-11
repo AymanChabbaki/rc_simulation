@@ -1,8 +1,7 @@
 import styles from './Controls.module.css';
-import { CAL_V, CAL_A } from './simulation';
 
-export default function Controls({ state, setS1, setS2, setCalibreV, setCalibreA }) {
-  const { s1, s2, vg, Cv, Ca, V, A, dRam, precAm, R, Res2, resultatM, resultatC } = state;
+export default function Controls({ state, setS1, setS2 }) {
+  const { s1, s2, vg, V, A, dRam, precAm, R, Res2, resultatM, resultatC } = state;
 
   const cLabels = ['1 μF', '10 μF', '100 μF', '1 mF', '10 mF'];
 
@@ -10,7 +9,9 @@ export default function Controls({ state, setS1, setS2, setCalibreV, setCalibreA
     <div className={styles.controls}>
       <h2 className={styles.heading}>Paramètres</h2>
 
-      {/* Generator + Capacitor */}
+      <div className={styles.sectionsRow}>
+
+      {/* Generator */}
       <div className={styles.section}>
         <div className={styles.sectionTitle}>Générateur</div>
         <label className={styles.label}>
@@ -27,6 +28,7 @@ export default function Controls({ state, setS1, setS2, setCalibreV, setCalibreA
         </label>
       </div>
 
+      {/* Capacitor */}
       <div className={styles.section}>
         <div className={styles.sectionTitle}>Condensateur</div>
         <label className={styles.label}>
@@ -45,44 +47,8 @@ export default function Controls({ state, setS1, setS2, setCalibreV, setCalibreA
         </label>
       </div>
 
-      {/* Voltmeter calibration */}
-      <div className={styles.section}>
-        <div className={styles.sectionTitle}>Voltmètre</div>
-        <div className={styles.meter}>
-          <div className={styles.btnRow}>
-            {CAL_V.map((v, i) => (
-              <button
-                key={i}
-                className={`${styles.calBtn} ${Cv === i ? styles.active : ''}`}
-                onClick={() => setCalibreV(i)}
-              >
-                {v < 1 ? `${v * 1000} mV` : `${v} V`}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Ammeter calibration */}
-      <div className={styles.section}>
-        <div className={styles.sectionTitle}>Ampèremètre</div>
-        <div className={styles.meter}>
-          <div className={styles.btnRow}>
-            {CAL_A.map((a, i) => (
-              <button
-                key={i}
-                className={`${styles.calBtn} ${Ca === i ? styles.active : ''}`}
-                onClick={() => setCalibreA(i)}
-              >
-                {a < 0.01 ? `${a * 1000} mA` : `${a} A`}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Measurements display */}
-      <div className={styles.section}>
+      <div className={`${styles.section} ${styles.sectionMeasures}`}>
         <div className={styles.sectionTitle}>Mesures</div>
         <table className={styles.table}>
           <tbody>
@@ -105,6 +71,8 @@ export default function Controls({ state, setS1, setS2, setCalibreV, setCalibreA
           </div>
         )}
       </div>
+
+      </div>{/* sectionsRow */}
     </div>
   );
 }

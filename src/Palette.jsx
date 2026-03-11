@@ -1,10 +1,10 @@
 import styles from './Palette.module.css';
 
 const CATEGORIES = [
-  { n: 1, letter: 'R', label: 'Résistance',   color: '#3f6f00' },
-  { n: 3, letter: 'C', label: 'Condensateur', color: '#0e7490' },
-  { n: 5, letter: 'I', label: 'Interrupteur', color: '#8a4f00' },
-  { n: 7, letter: 'E', label: 'Pile',         color: '#9f1239' },
+  { n: 1, img: '/images/R-H.png',  label: 'Résistance'   },
+  { n: 3, img: '/images/C-h.png',  label: 'Condensateur' },
+  { n: 5, img: '/images/I.png',    label: 'Interrupteur' },
+  { n: 7, img: '/images/Pile.png', label: 'Pile'         },
 ];
 
 export default function Palette({ onSelect }) {
@@ -12,10 +12,9 @@ export default function Palette({ onSelect }) {
     <div className={styles.palette}>
       <div className={styles.title}>Composants</div>
       {CATEGORIES.map(cat => (
-        <button key={cat.n} className={styles.btn} onClick={() => onSelect(cat.n)}
-          style={{ '--cat-color': cat.color }}>
-          <span className={styles.letter}>{cat.letter}</span>
-          <span className={styles.label}>{cat.label}</span>
+        <button key={cat.n} className={styles.btn} onClick={() => onSelect(cat.n)}>
+          <img src={cat.img} alt={cat.label} className={styles.compImg} draggable={false} />
+          <span className={styles.compLabel}>{cat.label}</span>
         </button>
       ))}
     </div>

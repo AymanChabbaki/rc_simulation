@@ -31,39 +31,52 @@ export default function App() {
         </div>
       </header>
 
-      <div className="app-body">
+      {/* ── Main area: Palette (outside body) + content ─────────── */}
+      <div className="main-area">
+
+        {/* Palette — vertical, sibling of app-body */}
         <Palette onSelect={showCategory} />
 
-        <div className="board-wrapper">
-          <div className="board-label">Circuit</div>
-          <CircuitBoard
-            state={state}
-            onDrop={drop}
-            onReset={reset}
-            W={600}
-            H={600}
-          />
-        </div>
+        <div className="app-body">
 
-        {showGraph && (
-          <div className="graph-wrapper">
-            <div className="graph-label">Courbe RC</div>
-            <RCGraph
-              type={state.dernierSchema}
-              R={state.R}
-              Res2={state.Res2}
-              vg={state.vg}
+          {/* ── Circuit Board ────────────────────────────────────── */}
+          <div className="board-wrapper">
+            <div className="board-label">Circuit</div>
+            <CircuitBoard
+              state={state}
+              onDrop={drop}
+              onReset={reset}
+              W={560}
+              H={560}
             />
           </div>
-        )}
 
-        <Controls
-          state={state}
-          setS1={setS1}
-          setS2={setS2}
-          setCalibreV={setCalibreV}
-          setCalibreA={setCalibreA}
-        />
+          {/* ── Right: Graph beside vertical Controls ─────────────── */}
+          <div className="right-panel">
+            <div className="graph-wrapper">
+              <div className="graph-label">Courbe RC</div>
+              {showGraph
+                ? <RCGraph
+                    type={state.dernierSchema}
+                    R={state.R}
+                    Res2={state.Res2}
+                    vg={state.vg}
+                    w={460}
+                    h={540}
+                  />
+                : <div className="graph-placeholder">
+                    <span>Assemblez le circuit<br/>pour voir la courbe</span>
+                  </div>
+              }
+            </div>
+            <Controls
+              state={state}
+              setS1={setS1}
+              setS2={setS2}
+            />
+          </div>
+
+        </div>
       </div>
     </div>
   );

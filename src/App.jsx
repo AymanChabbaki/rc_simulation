@@ -10,19 +10,32 @@ export default function App() {
 
   const showGraph = state.dernierSchema === 'charge' || state.dernierSchema === 'decharge';
 
+  const schemaLabel =
+    state.dernierSchema === 'charge'   ? 'Charge' :
+    state.dernierSchema === 'decharge' ? 'Décharge' : null;
+
   return (
     <div className="app-shell">
       <header className="app-header">
-        <span className="app-title">RC — Simulation</span>
-        <span className="app-subtitle">
-          Laboratoire virtuel · Charge &amp; Décharge d&apos;un condensateur
-        </span>
+        <div className="header-logo">RC</div>
+        <div className="header-text">
+          <span className="app-title">Simulation RC</span>
+          <span className="app-subtitle">Charge &amp; Décharge · Condensateur</span>
+        </div>
+        <div className="header-badge">
+          {schemaLabel ? (
+            <span className={`schema-chip ${state.dernierSchema}`}>{schemaLabel}</span>
+          ) : (
+            <span className="schema-chip idle">En attente</span>
+          )}
+        </div>
       </header>
 
       <div className="app-body">
         <Palette onSelect={showCategory} />
 
         <div className="board-wrapper">
+          <div className="board-label">Circuit</div>
           <CircuitBoard
             state={state}
             onDrop={drop}
@@ -34,6 +47,7 @@ export default function App() {
 
         {showGraph && (
           <div className="graph-wrapper">
+            <div className="graph-label">Courbe RC</div>
             <RCGraph
               type={state.dernierSchema}
               R={state.R}

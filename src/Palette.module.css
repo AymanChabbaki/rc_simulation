@@ -1,45 +1,78 @@
+﻿/* ── Component Palette — Instrument style ─────────────────────── */
+
 .palette {
-  width: 170px;
-  min-height: 600px;
-  background: #fff;
-  border-left: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 12px 8px;
-  gap: 10px;
+  width: 140px;
   flex-shrink: 0;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.02), 0 4px 20px rgba(0,0,0,0.08);
+  align-self: flex-start;
 }
 
 .title {
-  font-weight: bold;
-  font-size: 13px;
-  color: #333;
-  margin-bottom: 4px;
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.3);
+  padding: 10px 14px 9px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: rgba(0,0,0,0.02);
 }
 
 .btn {
-  width: 145px;
-  padding: 8px 6px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-  background: #f5f5f5;
-  cursor: pointer;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
-  transition: background 0.15s;
-  font-size: 11px;
-  color: #444;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  cursor: pointer;
+  color: rgba(0,0,0,0.55);
+  font-family: var(--font-ui, 'Space Grotesk', sans-serif);
+  font-size: 12.5px;
+  font-weight: 500;
+  text-align: left;
+  transition: background 0.12s, color 0.12s;
+}
+
+.btn:last-child {
+  border-bottom: none;
 }
 
 .btn:hover {
-  background: #ddeeff;
+  background: rgba(0,0,0,0.03);
+  color: var(--cat-color, #3f6f00);
 }
 
-.img {
-  max-width: 90px;
-  max-height: 50px;
-  object-fit: contain;
+.btn:hover .letter {
+  background: color-mix(in srgb, var(--cat-color, #a3e635) 20%, transparent);
+  border-color: color-mix(in srgb, var(--cat-color, #a3e635) 60%, transparent);
+  color: var(--cat-color, #a3e635);
+}
+
+.letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.04);
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.4);
+  flex-shrink: 0;
+  transition: all 0.12s;
+}
+
+.label {
+  line-height: 1.2;
 }

@@ -1,10 +1,10 @@
 import styles from './Palette.module.css';
 
 const CATEGORIES = [
-  { n: 1, src: '/images/Resistance.png', label: 'Résistance' },
-  { n: 3, src: '/images/C (1).png',      label: 'Condensateur' },
-  { n: 5, src: '/images/C (2).png',      label: 'Interrupteur' },
-  { n: 7, src: '/images/Pile.png',       label: 'Pile' },
+  { n: 1, letter: 'R', label: 'Résistance',   color: '#3f6f00' },
+  { n: 3, letter: 'C', label: 'Condensateur', color: '#0e7490' },
+  { n: 5, letter: 'I', label: 'Interrupteur', color: '#8a4f00' },
+  { n: 7, letter: 'E', label: 'Pile',         color: '#9f1239' },
 ];
 
 export default function Palette({ onSelect }) {
@@ -12,9 +12,10 @@ export default function Palette({ onSelect }) {
     <div className={styles.palette}>
       <div className={styles.title}>Composants</div>
       {CATEGORIES.map(cat => (
-        <button key={cat.n} className={styles.btn} onClick={() => onSelect(cat.n)}>
-          <img src={cat.src} alt={cat.label} className={styles.img} />
-          <span>{cat.label}</span>
+        <button key={cat.n} className={styles.btn} onClick={() => onSelect(cat.n)}
+          style={{ '--cat-color': cat.color }}>
+          <span className={styles.letter}>{cat.letter}</span>
+          <span className={styles.label}>{cat.label}</span>
         </button>
       ))}
     </div>

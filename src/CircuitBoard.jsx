@@ -136,23 +136,28 @@ export default function CircuitBoard({ state, onDrop, onReset, W = 600, H = 600 
   function wire(w, key) {
     const [x1, y1] = toSVG(w.x, w.y, W, H);
     const [x2, y2] = toSVG(w.x + w.dx, w.y + w.dy, W, H);
-    return <line key={key} x1={x1} y1={y1} x2={x2} y2={y2} stroke="blue" strokeWidth={4} />;
+    return <line key={key} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#b37c2f" strokeWidth={3} strokeLinecap="round" />;
   }
 
   return (
     <svg
       width={W}
       height={H}
-      style={{ background: 'rgba(200,220,208,1)', touchAction: 'none', flexShrink: 0 }}
+      style={{ background: '#d8e8c4', touchAction: 'none', flexShrink: 0, display: 'block' }}
     >
       {/* Wires */}
       {WIRES.map((w, i) => wire(w, `w${i}`))}
       {state.segVis && wire(SEG_WIRE, 'seg')}
 
-      {/* Connection nodes */}
+      {/* Connection nodes — PCB pad style */}
       {NODES.map((n, i) => {
         const [nx, ny] = toSVG(n.x, n.y, W, H);
-        return <circle key={`n${i}`} cx={nx} cy={ny} r={6} fill="none" stroke="orange" strokeWidth={2} />;
+        return (
+          <g key={`n${i}`}>
+            <circle cx={nx} cy={ny} r={7} fill="#c5deb0" stroke="#b37c2f" strokeWidth={1.5} />
+            <circle cx={nx} cy={ny} r={3} fill="#c9a24a" />
+          </g>
+        );
       })}
 
       {/* Draggable circuit elements */}

@@ -28,7 +28,7 @@ export const INITIAL_IMAGES = [
   { id: 3, type: "v", src: "/images/C-h.png",  init: INIT_V },
   { id: 4, type: "h", src: "/images/C-v.png",  init: INIT_H },
   { id: 5, type: "h", src: "/images/I.png",    init: INIT_H },
-  { id: 6, type: "h", src: "/images/If.png",   init: INIT_H },
+  { id: 6, type: "h", src: "/images/If.png",   init: { x: 0.3, y: -0.7 } },
   { id: 7, type: "h", src: "/images/P-H.png",  init: INIT_H },
   { id: 8, type: "v", src: "/images/P-V.png",  init: INIT_V },
 ];
@@ -61,6 +61,8 @@ export function makeInitialState() {
 }
 
 // ── Pure helper: snap-on-drop ─────────────────────────────────────────────────
+const SNAP_TOLERANCE = 0.13;
+
 export function dropImage(state, imgId, dropX, dropY) {
   const images = state.images.map(i => ({ ...i }));
   const img    = images.find(i => i.id === imgId);
@@ -75,7 +77,8 @@ export function dropImage(state, imgId, dropX, dropY) {
     const xMax = Math.max(p[1], p[2]);
     const yMin = Math.min(p[3], p[4]);
     const yMax = Math.max(p[3], p[4]);
-    if (dropX >= xMin && dropX <= xMax && dropY >= yMin && dropY <= yMax) {
+    if (dropX >= xMin - SNAP_TOLERANCE && dropX <= xMax + SNAP_TOLERANCE &&
+        dropY >= yMin - SNAP_TOLERANCE && dropY <= yMax + SNAP_TOLERANCE) {
       bestIndex = i;
       break;
     }

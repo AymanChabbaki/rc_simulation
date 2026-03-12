@@ -1,9 +1,10 @@
 ﻿/* ── Controls panel — Instrument style ─────────────────────────────────────── */
 
 .controls {
-  width: 100%;
-  max-width: 260px;
-  flex-shrink: 0;
+  flex: 1 1 220px;
+  min-width: 220px;
+  max-width: 248px;
+  align-self: flex-start;
   padding: 0;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -238,7 +239,8 @@
 
 @media (max-width: 749px) {
   .controls {
+    flex: 1 1 100%;
     width: 100%;
-    max-width: 480px;
+    max-width: 100%;
   }
 }

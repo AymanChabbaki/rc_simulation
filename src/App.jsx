@@ -51,28 +51,28 @@ export default function App() {
             />
           </div>
 
-          {/* ── Right: Graph beside vertical Controls ─────────────── */}
-          <div className="right-panel">
-            <div className="graph-wrapper">
-              <div className="graph-label">Courbe RC</div>
-              {showGraph
-                ? <RCGraph
-                    type={state.dernierSchema}
-                    R={state.R}
-                    Res2={state.Res2}
-                    vg={state.vg}
-                  />
-                : <div className="graph-placeholder">
-                    <span>Assemblez le circuit<br/>pour voir la courbe</span>
-                  </div>
-              }
-            </div>
-            <Controls
-              state={state}
-              setS1={setS1}
-              setS2={setS2}
-            />
+          {/* ── Graph ─────────────────────────────────────────────── */}
+          <div className="graph-wrapper">
+            <div className="graph-label">Courbe RC</div>
+            {showGraph
+              ? <RCGraph
+                  type={state.dernierSchema}
+                  R={state.R}
+                  Res2={state.Res2}
+                  vg={state.vg}
+                />
+              : <div className="graph-placeholder">
+                  <span>Assemblez le circuit<br/>pour voir la courbe</span>
+                </div>
+            }
           </div>
+
+          {/* ── Paramètres — own natural width ────────────────────── */}
+          <Controls
+            state={state}
+            setS1={setS1}
+            setS2={setS2}
+          />
 
         </div>
       </div>
